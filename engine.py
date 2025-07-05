@@ -51,9 +51,9 @@ def add_row(cursor, connection):
     new_classmate = interface.new_data()
     cursor.execute("""
         INSERT INTO students (name, out_of_state, occupation, went_to_university, university_name)
-        VALUES (?, ?, ?, ?, ?)
-    """,(new_classmate.name, int(new_classmate.out_of_state), new_classmate.occupation, int(new_classmate.went_to_university),
-         new_classmate.university_name))
+        VALUES (?, ?, ?, ?, ?)""",
+        (new_classmate.name, int(new_classmate.out_of_state), new_classmate.occupation, int(new_classmate.went_to_university),
+        new_classmate.university_name))
     connection.commit()
     interface.successfully_added(new_classmate)
 
