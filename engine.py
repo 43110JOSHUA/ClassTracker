@@ -1,4 +1,4 @@
-# This module handles interactions with the database and runs the main program
+# This module handles interactions with the database and interface, and runs the main program
 
 import sqlite3
 import interface
@@ -10,8 +10,8 @@ def main():
     cursor = connection.cursor()
 
     # STEP 1: Create Database
-    create_command = """CREATE TABLE IF NOT EXISTS students(
-        student_id INTEGER PRIMARY KEY,
+    create_command = """CREATE TABLE IF NOT EXISTS classmates(
+        classmate_id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
         out_of_state INTEGER NOT NULL,
         occupation TEXT NOT NULL ,
@@ -53,10 +53,10 @@ def main():
 
 
 def add_row(cursor, connection):
-    """Function to add a row to a database"""
+    """This function adds a row to a database"""
     new_classmate = interface.new_data()
     cursor.execute("""
-        INSERT INTO students (name, out_of_state, occupation, went_to_university, university_name)
+        INSERT INTO classmates (name, out_of_state, occupation, went_to_university, university_name)
         VALUES (?, ?, ?, ?, ?)""",
         (new_classmate.name, int(new_classmate.out_of_state), new_classmate.occupation, int(new_classmate.went_to_university),
         new_classmate.university_name))
@@ -65,6 +65,7 @@ def add_row(cursor, connection):
 
 
 def remove_row():
+    """This function removes a specified row from a database, given the """
     pass
 
 

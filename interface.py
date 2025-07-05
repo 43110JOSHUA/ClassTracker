@@ -3,12 +3,12 @@
 from classmate import Classmate
 
 invalid_command_message = "Invalid command."
-help_message = """1 - Add another classmate to the database.
-2 - Remove a classmate from the database.
-3 - Edit a classmate's entry.
-4 - Search for a classmate
-5 - Calculate statistics.
-6 - Quit program."""
+help_message = ("1 - Add another classmate to the database.\n"
+                "2 - Remove a classmate from the database.\n"
+                "3 - Edit a classmate's entry.\n"
+                "4 - Search for a classmate.\n"
+                "5 - Calculate statistics.\n"
+                "6 - Quit program.")
 quit_message = "Closing program."
 successful_entry = "Successfully added entry:"
 
@@ -37,6 +37,10 @@ def new_data() -> Classmate:
 def successfully_added(classmate: Classmate):
     print(successful_entry, classmate.name)
 
+
+def remove_data():
+    """This function """
+    pass
 
 # HELPERS
 def _get_new_data() -> Classmate:
