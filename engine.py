@@ -11,7 +11,7 @@ def main():
 
     # STEP 1: Create Database
     create_command = """CREATE TABLE IF NOT EXISTS classmates(
-        classmate_id INTEGER PRIMARY KEY,
+        classmate_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         out_of_state INTEGER NOT NULL,
         occupation TEXT NOT NULL ,
@@ -41,6 +41,9 @@ def main():
             pass
 
         elif user_in == '6':
+            pass
+
+        elif user_in == '7':
             interface.quit()
             break
 
