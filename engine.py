@@ -1,9 +1,9 @@
 # This module runs the main program
-import sqlite3
-from interface import *
-from classmate import Classmate
 
-db_name = 'yourClassData.db'
+import sqlite3
+import interface
+
+db_name = 'yourClassData.db' # Edit this if you want a different file name
 
 def add_row():
     pass
@@ -34,11 +34,11 @@ if __name__ == "__main__":
     connection.commit()
 
     # STEP 2: Main Loop
-    help()
+    interface.help()
     while True:
         user_in = input()
         if user_in == '1':
-            pass
+            interface.new_data()
 
         elif user_in == '2':
             pass
@@ -47,11 +47,11 @@ if __name__ == "__main__":
             pass
 
         elif user_in == '4':
-            quit()
+            interface.quit()
             break
 
         else: # invalid input
-            help()
+            interface.help()
 
     # STEP 3: Close Connection
     connection.close()
