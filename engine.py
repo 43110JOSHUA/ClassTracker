@@ -2,7 +2,6 @@
 
 import sqlite3
 import interface
-from classmate import Classmate
 
 db_name = 'yourClassData.db' # Edit this if you want a different file name
 
@@ -39,6 +38,9 @@ def main():
             pass
 
         elif user_in == '5':
+            pass
+
+        elif user_in == '6':
             interface.quit()
             break
 
@@ -60,6 +62,7 @@ def add_row(cursor, connection):
         new_classmate.university_name))
     connection.commit()
     interface.successfully_added(new_classmate)
+
 
 def remove_row():
     pass
