@@ -1,23 +1,12 @@
-# This module runs the main program
+# This module handles interactions with the database and runs the main program
 
 import sqlite3
 import interface
+from classmate import Classmate
 
 db_name = 'yourClassData.db' # Edit this if you want a different file name
 
-def add_row():
-    pass
-
-
-def remove_row():
-    pass
-
-
-def calc_stats():
-    pass
-
-
-if __name__ == "__main__":
+def main():
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
 
@@ -36,9 +25,9 @@ if __name__ == "__main__":
     # STEP 2: Main Loop
     interface.help()
     while True:
-        user_in = input()
+        user_in = input("\nCommand: ")
         if user_in == '1':
-            interface.new_data()
+            add_row(cursor, connection)
 
         elif user_in == '2':
             pass
@@ -56,3 +45,25 @@ if __name__ == "__main__":
     # STEP 3: Close Connection
     connection.close()
 
+
+def add_row(cursor, connection):
+    """Function to add a row to a database"""
+    new_classmate = interface.new_data()
+    cursor.execute("""
+        INSERT INTO students (name, out_of_state, occupation, went_to_university, university_name)
+        VALUES (?, ?, ?, ?, ?)
+    """,(new_classmate.name, int(new_classmate.out_of_state), new_classmate.occupation, int(new_classmate.went_to_university),
+         new_classmate.university_name))
+    connection.commit()
+    interface.successfully_added(new_classmate)
+
+def remove_row():
+    pass
+
+
+def calc_stats():
+    pass
+
+
+if __name__ == "__main__":
+    main()

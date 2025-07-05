@@ -5,9 +5,9 @@ from classmate import Classmate
 help_message = """1 - Add another classmate to the database.
 2 - Remove a classmate from the database.
 3 - Calculate statistics.
-4 - Quit program.
-"""
+4 - Quit program."""
 quit_message = "Closing program."
+successful_entry = "Successfully added entry:"
 
 def help():
     print(help_message)
@@ -25,6 +25,9 @@ def new_data() -> Classmate:
         correct = _validate_new_data(new_classmate)
 
     return new_classmate
+
+def successfully_added(classmate: Classmate):
+    print(successful_entry, classmate.name)
 
 
 # HELPERS
