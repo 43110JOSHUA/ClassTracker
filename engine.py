@@ -42,7 +42,8 @@ def main():
             interface.quit()
             break
 
-        else: # invalid input
+        else:
+            interface.invalid_command()
             interface.help()
 
     # STEP 3: Close Connection
@@ -61,6 +62,10 @@ def add_row(cursor, connection):
     interface.successfully_added(new_classmate)
 
 def remove_row():
+    pass
+
+
+def search_row():
     pass
 
 

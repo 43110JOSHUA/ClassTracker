@@ -2,12 +2,17 @@
 
 from classmate import Classmate
 
+invalid_command_message = "Invalid command."
 help_message = """1 - Add another classmate to the database.
 2 - Remove a classmate from the database.
-3 - Calculate statistics.
-4 - Quit program."""
+3 - Search for a classmate
+4 - Calculate statistics.
+5 - Quit program."""
 quit_message = "Closing program."
 successful_entry = "Successfully added entry:"
+
+def invalid_command():
+    print(invalid_command_message)
 
 def help():
     print(help_message)
