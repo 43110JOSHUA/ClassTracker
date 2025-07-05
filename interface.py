@@ -7,8 +7,9 @@ help_message = ("1 - Add another classmate to the database.\n"
                 "2 - Remove a classmate from the database.\n"
                 "3 - Edit a classmate's entry.\n"
                 "4 - Search for a classmate.\n"
-                "5 - Calculate statistics.\n"
-                "6 - Quit program.")
+                "5 - View all classmates.\n"
+                "6 - Calculate statistics.\n"
+                "7 - Quit program.")
 quit_message = "Closing program."
 successful_entry = "Successfully added entry:"
 
