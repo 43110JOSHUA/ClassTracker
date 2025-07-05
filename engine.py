@@ -1,6 +1,7 @@
 # This module runs the main program
 import sqlite3
 from interface import *
+from classmate import Classmate
 
 db_name = 'yourClassData.db'
 
