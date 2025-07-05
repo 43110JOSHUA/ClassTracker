@@ -1,6 +1,7 @@
 # Classmate Tracker
 
 A **simple Python + SQLite3** program to store and analyze information about your friends or classmates in a local database.
+Each entry has a peron's name, are they out-of-state, occupation, did they go to college, name of college (if attended).
 
 ## Getting Started
 1) run engine.py

@@ -11,7 +11,9 @@ help_message = ("1 - Add another classmate to the database.\n"
                 "6 - Calculate statistics.\n"
                 "7 - Quit program.")
 quit_message = "Closing program."
-successful_entry = "Successfully added entry:"
+successful_entry_message = "Successfully added entry:"
+successful_remove_message = "Successfully removed entry:"
+failure_remove_message = "Provided ID doesn't exist:"
 
 def invalid_command():
     print(invalid_command_message)
@@ -36,12 +38,26 @@ def new_data() -> Classmate:
 
 
 def successfully_added(classmate: Classmate):
-    print(successful_entry, classmate.name)
+    print(successful_entry_message, classmate.name)
 
 
-def remove_data():
-    """This function """
-    pass
+def remove_data() -> int:
+    """This function will collect and return the ID number of the classmate to remove."""
+    id_to_remove = input("Enter the ID number of the entry to remove: ")
+    while not id_to_remove.isnumeric():
+        invalid_command()
+        id_to_remove = input("Enter the ID number of the entry to remove: ")
+    
+    return int(id_to_remove)
+
+
+def successfully_removed(classmate_name: str):
+    print(successful_remove_message, classmate_name)
+
+
+def failure_remove(id: int):
+    print(failure_remove_message, id)
+
 
 # HELPERS
 def _get_new_data() -> Classmate:

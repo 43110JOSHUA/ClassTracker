@@ -29,7 +29,7 @@ def main():
             add_row(cursor, connection)
 
         elif user_in == '2':
-            pass
+            remove_row(cursor, connection)
 
         elif user_in == '3':
             pass
@@ -67,9 +67,18 @@ def add_row(cursor, connection):
     interface.successfully_added(new_classmate)
 
 
-def remove_row():
-    """This function removes a specified row from a database, given the """
-    pass
+def remove_row(cursor, connection):
+    """This function removes a specified row from a database"""
+    id_to_remove = interface.remove_data()
+    cursor.execute(f"SELECT name FROM classmates WHERE classmate_id = {id_to_remove}")
+    classmate_to_remove = cursor.fetchone()
+
+    if (classmate_to_remove):
+        cursor.execute(f"DELETE FROM classmates WHERE classmate_id = {id_to_remove}")
+        connection.commit()
+        interface.successfully_removed(classmate_to_remove[0])
+    else: # id doesn't exist
+        interface.failure_remove(id_to_remove)
 
 
 def search_row():
