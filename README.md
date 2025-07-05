@@ -2,9 +2,7 @@
 
 A **simple Python + SQLite3** program to store and analyze information about your friends or classmates in a local database.
 
----
-
-## How to run program
+## Getting Started
 1) run engine.py
 2) COMMANDS:
     - 1 - Add another classmate to the database.
