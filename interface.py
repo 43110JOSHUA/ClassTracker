@@ -44,13 +44,9 @@ def _get_new_data() -> Classmate:
     return Classmate(name, out_of_state, occupation, went_to_university, university_name)
 
 
-def _validate_new_data(data: Classmate) -> bool:
+def _validate_new_data(new_classmate: Classmate) -> bool:
     """This helper function prints the collected information so the user can double check if it's correct."""
     print("\nSUMMARY:")
-    print("Name:", data.name)
-    print("Out of state:", data.out_of_state)
-    print("Occuaption:", data.occupation)
-    print("Went to college:", data.went_to_university)
-    print("University name:", data.university_name)
+    print(new_classmate)
 
     return input("Is the following information correct? (y/n): ") == 'y'

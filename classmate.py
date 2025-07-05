@@ -10,3 +10,7 @@ class Classmate:
         self.occupation = occupation
         self.went_to_university = went_to_university
         self.university_name = university_name
+
+    def __str__(self):
+        return (f"Name: {self.name}\nOut of state: {self.out_of_state}\nOccupation: {self.occupation}\n"
+                f"Went to college: {self.went_to_university}\nUniversity name: {self.university_name}")
