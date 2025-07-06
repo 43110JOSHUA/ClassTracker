@@ -35,9 +35,15 @@ def quit():
 
 def new_data() -> UncreatedClassmate:
     """This function will collect the data for the new classmate."""
-    new_classmate = _get_new_data()
+    name = input("Enter full name: ")
+    out_of_state = input("Did they leave the state? (y/n): ").lower() == 'y'
+    occupation = input("Enter occupation: ").lower()
+    went_to_university = input("Did they go to university? (y/n): ").lower() == 'y'
+    university_name = "N/A"
+    if went_to_university:
+        university_name = input("Enter the name of the university: ").lower()
 
-    return new_classmate
+    return UncreatedClassmate(name, out_of_state, occupation, went_to_university, university_name)
 
 
 def successfully_action(classmate: Classmate, action: str):
@@ -48,10 +54,10 @@ def successfully_action(classmate: Classmate, action: str):
 def request_id(action: str = "access") -> int:
     """Prompts the user for an ID number with context. Accepts a custom action string to reuse for
     different commands (e.g., 'remove', 'edit')."""
-    wanted_id = input(f"Enter the ID number of the entry to {action}: ")
+    wanted_id = input(f"Enter the ID number of the classmate to {action}: ")
     while not wanted_id.isnumeric():
         invalid_command()
-        wanted_id = input(f"Enter the ID number of the entry to {action}: ")
+        wanted_id = input(f"Enter the ID number of the classmate to {action}: ")
     
     return int(wanted_id)
 
@@ -60,23 +66,14 @@ def failure_id(id: int):
     print(failure_id_message, id)
 
 
+def request_name() -> str:
+    """Prompts the use for a name to search up in the database."""
+    return input("Enter the name of the classmate to search: ")
+
+
 def print_table(data: list[list]):
     """This function prints all provided classmates in table format."""
     if data:
         print(tabulate(data, headers=headers, tablefmt="github"))
     else:
         print(empty_db_message)
-
-
-# HELPERS
-def _get_new_data() -> UncreatedClassmate:
-    """This helper function is used to collect the information of the new classmate."""
-    name = input("Enter full name: ")
-    out_of_state = input("Did they leave the state? (y/n): ").lower() == 'y'
-    occupation = input("Enter occupation: ").lower()
-    went_to_university = input("Did they go to university? (y/n): ").lower() == 'y'
-    university_name = "N/A"
-    if went_to_university:
-        university_name = input("Enter the name of the university: ").lower()
-
-    return UncreatedClassmate(name, out_of_state, occupation, went_to_university, university_name)

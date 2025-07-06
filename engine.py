@@ -36,7 +36,7 @@ def main():
             edit_row(cursor, connection)
 
         elif user_in == '4':
-            pass
+            search_row(cursor)
 
         elif user_in == '5':
             view_all(cursor)
@@ -101,8 +101,18 @@ def edit_row(cursor, connection):
         interface.failure_id(id_to_edit)
 
 
-def search_row():
-    pass
+def search_row(cursor):
+    """Searches and displays all classmates based on provided name."""
+    name = interface.request_name()
+    cursor.execute("SELECT * FROM classmates WHERE name LIKE ?", (f"%{name}%",))
+    rows = cursor.fetchall()
+
+    table_data = []
+    for row in rows:
+        classmate = Classmate(row[0], row[1], bool(row[2]), row[3], bool(row[4]), row[5])
+        table_data.append(classmate.to_list())
+    
+    interface.print_table(table_data)
 
 
 def view_all(cursor):
