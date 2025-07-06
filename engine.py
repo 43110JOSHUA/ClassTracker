@@ -2,6 +2,7 @@
 
 import sqlite3
 import interface
+from classmate import Classmate
 
 db_name = 'yourClassData.db' # Edit this if you want a different file name
 
@@ -64,19 +65,18 @@ def add_row(cursor, connection):
         (new_classmate.name, int(new_classmate.out_of_state), new_classmate.occupation, int(new_classmate.went_to_university),
         new_classmate.university_name))
     connection.commit()
-    interface.successfully_added(new_classmate)
+    interface.successfully_action(new_classmate, "added")
 
 
 def remove_row(cursor, connection):
     """This function removes a specified row from a database"""
     id_to_remove = interface.request_id("remove")
-    cursor.execute(f"SELECT name FROM classmates WHERE classmate_id = {id_to_remove}")
-    classmate_to_remove = cursor.fetchone()
+    classmate_to_remove = _retrieve_row(cursor, id_to_remove)
 
     if (classmate_to_remove):
-        cursor.execute(f"DELETE FROM classmates WHERE classmate_id = {id_to_remove}")
+        cursor.execute(f"DELETE FROM classmates WHERE classmate_id = ?", (id_to_remove,))
         connection.commit()
-        interface.successfully_removed(classmate_to_remove[0])
+        interface.successfully_action(classmate_to_remove, "removed")
     else: # id doesn't exist
         interface.failure_id(id_to_remove)
 
@@ -93,6 +93,17 @@ def search_row():
 def calc_stats():
     pass
 
+
+# HELPERS
+def _retrieve_row(cursor, id_num: int) -> Classmate:
+    """This helper function retrieves a row given an ID number and returns entry as a Classmate object"""
+    cursor.execute("SELECT * FROM classmates WHERE classmate_id = ?", (id_num,))
+    classmate_found = cursor.fetchone()
+
+    if classmate_found:
+        return Classmate(classmate_found[1], classmate_found[2], classmate_found[3], classmate_found[4], classmate_found[5])
+    else: 
+        return None
 
 if __name__ == "__main__":
     main()

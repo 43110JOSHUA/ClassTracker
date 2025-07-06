@@ -11,8 +11,6 @@ help_message = ("1 - Add another classmate to the database.\n"
                 "6 - Calculate statistics.\n"
                 "7 - Quit program.")
 quit_message = "Closing program."
-successful_entry_message = "Successfully added entry:"
-successful_remove_message = "Successfully removed entry:"
 failure_id_message = "Provided ID doesn't exist:"
 
 def command_input():
@@ -41,8 +39,9 @@ def new_data() -> Classmate:
     return new_classmate
 
 
-def successfully_added(classmate: Classmate):
-    print(successful_entry_message, classmate.name)
+def successfully_action(classmate: Classmate, action: str):
+    """This function is called for any successful operation on an entry in the database."""
+    print(f"Successfully {action} entry:", classmate.name)
 
 
 def request_id(action: str = "access") -> int:
@@ -54,9 +53,6 @@ def request_id(action: str = "access") -> int:
         wanted_id = input(f"Enter the ID number of the entry to {action}: ")
     
     return int(wanted_id)
-
-def successfully_removed(classmate_name: str):
-    print(successful_remove_message, classmate_name)
 
 
 def failure_id(id: int):
