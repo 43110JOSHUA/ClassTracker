@@ -96,6 +96,7 @@ def edit_row(cursor, connection):
                                                        editted_classmate.occupation, int(editted_classmate.went_to_university),
                                                        editted_classmate.university_name, id_to_edit))
         connection.commit()
+        interface.successfully_action(classmate_to_edit, "editted")
 
     else:
         interface.failure_id(id_to_edit)
