@@ -33,7 +33,7 @@ def main():
             remove_row(cursor, connection)
 
         elif user_in == '3':
-            pass
+            edit_row(cursor, connection)
 
         elif user_in == '4':
             pass
@@ -59,12 +59,14 @@ def main():
 def add_row(cursor, connection):
     """This function adds a row to a database"""
     new_classmate = interface.new_data()
+
     cursor.execute("""
         INSERT INTO classmates (name, out_of_state, occupation, went_to_university, university_name)
         VALUES (?, ?, ?, ?, ?)""",
         (new_classmate.name, int(new_classmate.out_of_state), new_classmate.occupation, int(new_classmate.went_to_university),
         new_classmate.university_name))
     connection.commit()
+
     interface.successfully_action(new_classmate, "added")
 
 
@@ -77,6 +79,7 @@ def remove_row(cursor, connection):
         cursor.execute(f"DELETE FROM classmates WHERE classmate_id = ?", (id_to_remove,))
         connection.commit()
         interface.successfully_action(classmate_to_remove, "removed")
+
     else: # id doesn't exist
         interface.failure_id(id_to_remove)
 
@@ -84,6 +87,13 @@ def remove_row(cursor, connection):
 def edit_row(cursor, connection):
     """This function edits an existing row in the database"""
     id_to_edit = interface.request_id("edit")
+    classmate_to_edit = _retrieve_row(cursor, id_to_edit)
+
+    if (classmate_to_edit):
+        pass
+
+    else:
+        interface.failure_id(id_to_edit)
 
 
 def search_row():
@@ -101,9 +111,11 @@ def _retrieve_row(cursor, id_num: int) -> Classmate:
     classmate_found = cursor.fetchone()
 
     if classmate_found:
-        return Classmate(classmate_found[1], classmate_found[2], classmate_found[3], classmate_found[4], classmate_found[5])
+        return Classmate(classmate_found[0], classmate_found[1], classmate_found[2], classmate_found[3],
+                         classmate_found[4], classmate_found[5])
     else: 
         return None
+
 
 if __name__ == "__main__":
     main()

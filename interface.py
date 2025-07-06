@@ -1,6 +1,7 @@
 # This module contains user interface functions
 
-from classmate import Classmate
+from classmate import Classmate, UncreatedClassmate
+
 
 invalid_command_message = "Invalid command."
 help_message = ("1 - Add another classmate to the database.\n"
@@ -29,12 +30,9 @@ def quit():
     print(quit_message)
 
 
-def new_data() -> Classmate:
+def new_data() -> UncreatedClassmate:
     """This function will collect and create the new classmate."""
-    correct = False
-    while not correct:
-        new_classmate = _get_new_data()
-        correct = _validate_new_data(new_classmate)
+    new_classmate = _get_new_data()
 
     return new_classmate
 
@@ -60,7 +58,7 @@ def failure_id(id: int):
 
 
 # HELPERS
-def _get_new_data() -> Classmate:
+def _get_new_data() -> UncreatedClassmate:
     """This helper function is used to collect the information of the new classmate."""
     name = input("Enter full name: ")
     out_of_state = input("Did they leave the state? (y/n): ").lower() == 'y'
@@ -70,7 +68,7 @@ def _get_new_data() -> Classmate:
     if went_to_university:
         university_name = input("Enter the name of the university: ").lower()
 
-    return Classmate(name, out_of_state, occupation, went_to_university, university_name)
+    return UncreatedClassmate(name, out_of_state, occupation, went_to_university, university_name)
 
 
 def _validate_new_data(new_classmate: Classmate) -> bool:
