@@ -4,8 +4,9 @@ A **simple Python + SQLite3** program to store and analyze information about you
 Each entry has a peron's name, are they out-of-state, occupation, did they go to college, name of college (if attended).
 
 ## Getting Started
-1) run engine.py
-2) COMMANDS:
+1) run "pip install tabulate" in terminal.
+2) run engine.py
+3) COMMANDS:
     - 1 - Add a classmate to the database.
     - 2 - Remove a classmate from the database.
     - 3 - Edit a classmate's entry.

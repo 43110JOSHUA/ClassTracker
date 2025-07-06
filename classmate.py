@@ -1,7 +1,7 @@
 # This module contains the class to represent your classmates
 from collections import namedtuple
 
-# for no_ID classmate
+# for no_ID classmate. Used when adding new entries
 UncreatedClassmate = namedtuple("UncreatedClassmate", ["name", "out_of_state", "occupation", "went_to_university", "university_name"])
 
 class Classmate:
@@ -14,6 +14,6 @@ class Classmate:
         self.university_name = university_name
 
 
-    def __str__(self):
-        return (f"Name: {self.name}\nOut of state: {self.out_of_state}\nOccupation: {self.occupation}\n"
-                f"Went to university: {self.went_to_university}\nUniversity name: {self.university_name}")
+    def to_list(self):
+        """This method returns all the classmate's data in a list for printing"""
+        return [self.id, self.name, self.out_of_state, self.occupation, self.went_to_university, self.university_name]

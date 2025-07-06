@@ -57,7 +57,7 @@ def main():
 
 
 def add_row(cursor, connection):
-    """This function adds a row to a database"""
+    """This function adds a row to a database."""
     new_classmate = interface.new_data()
 
     cursor.execute("""
@@ -71,7 +71,7 @@ def add_row(cursor, connection):
 
 
 def remove_row(cursor, connection):
-    """This function removes a specified row from a database"""
+    """This function removes a specified row from a database."""
     id_to_remove = interface.request_id("remove")
     classmate_to_remove = _retrieve_row(cursor, id_to_remove)
 
@@ -85,7 +85,7 @@ def remove_row(cursor, connection):
 
 
 def edit_row(cursor, connection):
-    """This function edits an existing row in the database"""
+    """This function edits an existing row in the database."""
     id_to_edit = interface.request_id("edit")
     classmate_to_edit = _retrieve_row(cursor, id_to_edit)
 
@@ -100,13 +100,17 @@ def search_row():
     pass
 
 
+def view_all(cursor):
+    pass
+
+
 def calc_stats():
     pass
 
 
 # HELPERS
 def _retrieve_row(cursor, id_num: int) -> Classmate:
-    """This helper function retrieves a row given an ID number and returns entry as a Classmate object"""
+    """This helper function retrieves a row given an ID number and returns entry as a Classmate object."""
     cursor.execute("SELECT * FROM classmates WHERE classmate_id = ?", (id_num,))
     classmate_found = cursor.fetchone()
 

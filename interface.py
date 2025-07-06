@@ -1,6 +1,7 @@
 # This module contains user interface functions
 
 from classmate import Classmate, UncreatedClassmate
+from tabulate import tabulate
 
 
 invalid_command_message = "Invalid command."
@@ -13,6 +14,7 @@ help_message = ("1 - Add another classmate to the database.\n"
                 "7 - Quit program.")
 quit_message = "Closing program."
 failure_id_message = "Provided ID doesn't exist:"
+headers = ["ID", "Name", "Out of State", "Occupation", "Went to University", "University Name"]
 
 def command_input():
     return input("\nCommand: ")
@@ -31,7 +33,7 @@ def quit():
 
 
 def new_data() -> UncreatedClassmate:
-    """This function will collect and create the new classmate."""
+    """This function will collect the data for the new classmate."""
     new_classmate = _get_new_data()
 
     return new_classmate
@@ -55,6 +57,12 @@ def request_id(action: str = "access") -> int:
 
 def failure_id(id: int):
     print(failure_id_message, id)
+
+
+def print_table(data: list[Classmate]):
+    """This function prints all provided classmates in table format."""
+    formatted_data = [classmate.to_list() for classmate in data]
+    print(tabulate(formatted_data, headers=headers, tablefmt="grid"))
 
 
 # HELPERS
