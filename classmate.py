@@ -12,8 +12,3 @@ class Classmate:
         self.occupation = occupation
         self.went_to_university = went_to_university
         self.university_name = university_name
-
-
-    def to_list(self):
-        """This method returns all the classmate's data in a list for printing"""
-        return [self.id, self.name, self.out_of_state, self.occupation, self.went_to_university, self.university_name]
