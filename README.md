@@ -5,7 +5,7 @@ Each entry has a peron's name, are they out-of-state, occupation, did they go to
 
 ## Getting Started
 1) run "pip install tabulate" in terminal.
-2) run engine.py
+2) run main.py
 3) COMMANDS:
     - 1 - Add a classmate to the database.
     - 2 - Remove a classmate from the database.

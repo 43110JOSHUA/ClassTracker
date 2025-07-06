@@ -1,4 +1,4 @@
-# This module contains user interface functions
+# This module contains user interface functions handling I/O
 
 from classmate import Classmate, UncreatedClassmate
 from tabulate import tabulate
