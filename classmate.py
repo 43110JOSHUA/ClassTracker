@@ -1,4 +1,5 @@
 # This module contains the class to represent your classmates
+
 from collections import namedtuple
 
 # for no_ID classmate. Used when adding and updating entries

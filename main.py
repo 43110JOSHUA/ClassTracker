@@ -119,6 +119,7 @@ def view_all(cursor):
 
 
 def calc_stats():
+    """Calculates and displays statistics."""
     pass
 
 
