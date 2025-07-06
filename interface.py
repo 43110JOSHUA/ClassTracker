@@ -41,7 +41,7 @@ def new_data() -> UncreatedClassmate:
     went_to_university = input("Did they go to university? (y/n): ").lower() == 'y'
     university_name = "N/A"
     if went_to_university:
-        university_name = input("Enter the name of the university: ").lower()
+        university_name = input("Enter the name of the university: ")
 
     return UncreatedClassmate(name, out_of_state, occupation, went_to_university, university_name)
 
