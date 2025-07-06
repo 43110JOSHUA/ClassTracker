@@ -80,11 +80,3 @@ def _get_new_data() -> UncreatedClassmate:
         university_name = input("Enter the name of the university: ").lower()
 
     return UncreatedClassmate(name, out_of_state, occupation, went_to_university, university_name)
-
-
-def _validate_new_data(new_classmate: Classmate) -> bool:
-    """This helper function prints the collected information so the user can double check if it's correct."""
-    print("\nSUMMARY:")
-    print(new_classmate)
-
-    return input("Is the following information correct? (y/n): ") == 'y'

@@ -1,7 +1,7 @@
 # This module contains the class to represent your classmates
 from collections import namedtuple
 
-# for no_ID classmate. Used when adding new entries
+# for no_ID classmate. Used when adding and updating entries
 UncreatedClassmate = namedtuple("UncreatedClassmate", ["name", "out_of_state", "occupation", "went_to_university", "university_name"])
 
 class Classmate:

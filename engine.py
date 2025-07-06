@@ -76,7 +76,7 @@ def remove_row(cursor, connection):
     classmate_to_remove = _retrieve_row(cursor, id_to_remove)
 
     if (classmate_to_remove):
-        cursor.execute(f"DELETE FROM classmates WHERE classmate_id = ?", (id_to_remove,))
+        cursor.execute("DELETE FROM classmates WHERE classmate_id = ?", (id_to_remove,))
         connection.commit()
         interface.successfully_action(classmate_to_remove, "removed")
 
@@ -90,7 +90,12 @@ def edit_row(cursor, connection):
     classmate_to_edit = _retrieve_row(cursor, id_to_edit)
 
     if (classmate_to_edit):
-        pass
+        editted_classmate = interface.new_data()
+        cursor.execute("UPDATE classmates SET name = ?, out_of_state = ?, occupation = ?, went_to_university = ?," \
+        "university_name = ? WHERE classmate_id = ?", (editted_classmate.name, int(editted_classmate.out_of_state),
+                                                       editted_classmate.occupation, int(editted_classmate.went_to_university),
+                                                       editted_classmate.university_name, id_to_edit))
+        connection.commit()
 
     else:
         interface.failure_id(id_to_edit)
@@ -106,7 +111,6 @@ def view_all(cursor):
     rows = cursor.fetchall()
 
     table_data = []
- 
     for row in rows:
         classmate = Classmate(row[0], row[1], bool(row[2]), row[3], bool(row[4]), row[5])
         table_data.append(classmate.to_list())
