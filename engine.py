@@ -24,7 +24,7 @@ def main():
     # STEP 2: Main Loop
     interface.help()
     while True:
-        user_in = input("\nCommand: ")
+        user_in = interface.command_input()
         if user_in == '1':
             add_row(cursor, connection)
 
@@ -69,7 +69,7 @@ def add_row(cursor, connection):
 
 def remove_row(cursor, connection):
     """This function removes a specified row from a database"""
-    id_to_remove = interface.remove_data()
+    id_to_remove = interface.request_id("remove")
     cursor.execute(f"SELECT name FROM classmates WHERE classmate_id = {id_to_remove}")
     classmate_to_remove = cursor.fetchone()
 
@@ -78,7 +78,12 @@ def remove_row(cursor, connection):
         connection.commit()
         interface.successfully_removed(classmate_to_remove[0])
     else: # id doesn't exist
-        interface.failure_remove(id_to_remove)
+        interface.failure_id(id_to_remove)
+
+
+def edit_row(cursor, connection):
+    """This function edits an existing row in the database"""
+    id_to_edit = interface.request_id("edit")
 
 
 def search_row():

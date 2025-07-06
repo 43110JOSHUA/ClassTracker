@@ -13,7 +13,11 @@ help_message = ("1 - Add another classmate to the database.\n"
 quit_message = "Closing program."
 successful_entry_message = "Successfully added entry:"
 successful_remove_message = "Successfully removed entry:"
-failure_remove_message = "Provided ID doesn't exist:"
+failure_id_message = "Provided ID doesn't exist:"
+
+def command_input():
+    return input("\nCommand: ")
+
 
 def invalid_command():
     print(invalid_command_message)
@@ -41,22 +45,22 @@ def successfully_added(classmate: Classmate):
     print(successful_entry_message, classmate.name)
 
 
-def remove_data() -> int:
-    """This function will collect and return the ID number of the classmate to remove."""
-    id_to_remove = input("Enter the ID number of the entry to remove: ")
-    while not id_to_remove.isnumeric():
+def request_id(action: str = "access") -> int:
+    """Prompts the user for an ID number with context. Accepts a custom action string to reuse for
+    different commands (e.g., 'remove', 'edit')."""
+    wanted_id = input(f"Enter the ID number of the entry to {action}: ")
+    while not wanted_id.isnumeric():
         invalid_command()
-        id_to_remove = input("Enter the ID number of the entry to remove: ")
+        wanted_id = input(f"Enter the ID number of the entry to {action}: ")
     
-    return int(id_to_remove)
-
+    return int(wanted_id)
 
 def successfully_removed(classmate_name: str):
     print(successful_remove_message, classmate_name)
 
 
-def failure_remove(id: int):
-    print(failure_remove_message, id)
+def failure_id(id: int):
+    print(failure_id_message, id)
 
 
 # HELPERS
