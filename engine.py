@@ -39,7 +39,7 @@ def main():
             pass
 
         elif user_in == '5':
-            pass
+            view_all(cursor)
 
         elif user_in == '6':
             pass
@@ -101,7 +101,17 @@ def search_row():
 
 
 def view_all(cursor):
-    pass
+    """Displays all classmates in the database in a table format."""
+    cursor.execute("SELECT * FROM classmates")
+    rows = cursor.fetchall()
+
+    table_data = []
+ 
+    for row in rows:
+        classmate = Classmate(row[0], row[1], bool(row[2]), row[3], bool(row[4]), row[5])
+        table_data.append(classmate.to_list())
+    
+    interface.print_table(table_data)
 
 
 def calc_stats():

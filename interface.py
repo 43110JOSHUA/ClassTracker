@@ -15,6 +15,7 @@ help_message = ("1 - Add another classmate to the database.\n"
 quit_message = "Closing program."
 failure_id_message = "Provided ID doesn't exist:"
 headers = ["ID", "Name", "Out of State", "Occupation", "Went to University", "University Name"]
+empty_db_message = "No entries found in the database."
 
 def command_input():
     return input("\nCommand: ")
@@ -59,10 +60,12 @@ def failure_id(id: int):
     print(failure_id_message, id)
 
 
-def print_table(data: list[Classmate]):
+def print_table(data: list[list]):
     """This function prints all provided classmates in table format."""
-    formatted_data = [classmate.to_list() for classmate in data]
-    print(tabulate(formatted_data, headers=headers, tablefmt="grid"))
+    if data:
+        print(tabulate(data, headers=headers, tablefmt="github"))
+    else:
+        print(empty_db_message)
 
 
 # HELPERS
