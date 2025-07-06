@@ -42,7 +42,7 @@ def main():
             view_all(cursor)
 
         elif user_in == '6':
-            pass
+            calc_stats(cursor)
 
         elif user_in == '7':
             interface.quit()
@@ -105,27 +105,17 @@ def search_row(cursor):
     """Searches and displays all classmates based on provided name."""
     name = interface.request_name()
     cursor.execute("SELECT * FROM classmates WHERE name LIKE ?", (f"%{name}%",))
-    rows = cursor.fetchall()
-
-    table_data = []
-    for row in rows:
-        classmate = Classmate(row[0], row[1], bool(row[2]), row[3], bool(row[4]), row[5])
-        table_data.append(classmate.to_list())
+    db_data = cursor.fetchall()
     
-    interface.print_table(table_data)
+    interface.print_table(db_data)
 
 
 def view_all(cursor):
     """Displays all classmates in the database in a table format."""
     cursor.execute("SELECT * FROM classmates")
-    rows = cursor.fetchall()
-
-    table_data = []
-    for row in rows:
-        classmate = Classmate(row[0], row[1], bool(row[2]), row[3], bool(row[4]), row[5])
-        table_data.append(classmate.to_list())
+    db_data = cursor.fetchall()
     
-    interface.print_table(table_data)
+    interface.print_table(db_data)
 
 
 def calc_stats():
