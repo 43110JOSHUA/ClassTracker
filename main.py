@@ -74,6 +74,7 @@ def edit_row(cursor, connection):
     classmate_to_edit = _retrieve_row(cursor, id_to_edit)
 
     if classmate_to_edit:
+        interface.print_classmates([classmate_to_edit])
         editted_classmate = interface.request_new_data()
         cursor.execute("""
             UPDATE classmates 
