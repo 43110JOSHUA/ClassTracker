@@ -52,7 +52,7 @@ def print_table(data: list[Classmate]):
 
 
 def print_stats(data: dict):
-    """This function prints stats."""
+    """This function prints stats. Provided the data from stats function"""
     # University attendance
     uni_header = ["", "Attended University", "Did Not Attend"]
     print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))

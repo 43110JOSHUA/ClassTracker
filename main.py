@@ -16,6 +16,8 @@ create_command = """CREATE TABLE IF NOT EXISTS classmates(
         )"""
 
 def main():
+    """Run the main loop of the program. Connects to the database, creates the table if it doesn't exist, 
+    and handles user input until the program is exited. """
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
 
@@ -58,7 +60,8 @@ def main():
 
 
 def add_row(cursor, connection):
-    """This function adds a row to a database."""
+    """Prompt the user for new classmate data and insert it into the database.
+    Commits the change after successful insertion."""
     new_classmate = interface.new_data()
 
     cursor.execute("""
@@ -72,7 +75,8 @@ def add_row(cursor, connection):
 
 
 def remove_row(cursor, connection):
-    """This function removes a specified row from a database."""
+    """Prompt the user for an ID and remove the corresponding classmate entry from the database.
+    Displays success or failure message based on ID existence."""
     id_to_remove = interface.request_id("remove")
     classmate_to_remove = _retrieve_row(cursor, id_to_remove)
 
@@ -86,7 +90,8 @@ def remove_row(cursor, connection):
 
 
 def edit_row(cursor, connection):
-    """This function edits an existing row in the database."""
+    """Prompt the user for an ID and update the corresponding classmate entry in the database.
+    Replaces the existing entry with new user-provided values."""
     id_to_edit = interface.request_id("edit")
     classmate_to_edit = _retrieve_row(cursor, id_to_edit)
 
@@ -104,7 +109,8 @@ def edit_row(cursor, connection):
 
 
 def search_row(cursor):
-    """Searches and displays all classmates based on provided name."""
+    """ Prompt the user for a name (or partial name), search for matching entries in the database,
+    and display results in a formatted table."""
     name = interface.request_name()
     cursor.execute("SELECT * FROM classmates WHERE name LIKE ?", (f"%{name}%",))
     db_data = cursor.fetchall()
@@ -114,7 +120,7 @@ def search_row(cursor):
 
 
 def view_all(cursor):
-    """Displays all classmates in the database in a table format."""
+    """Retrieve and display all classmate entries from the database in a formatted table."""
     cursor.execute("SELECT * FROM classmates")
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
@@ -123,7 +129,8 @@ def view_all(cursor):
 
 
 def calc_stats(cursor):
-    """Calculates and displays statistics."""
+    """Retrieve all classmate entries from the database, compute statistics,
+    and display the results using the interface module."""
     cursor.execute("SELECT * FROM classmates")
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
@@ -146,7 +153,7 @@ def _retrieve_row(cursor, id_num: int) -> Classmate:
 
 
 def _convert_to_classmate(data: list[list]) -> list[Classmate]:
-    """This helper function converts a list of raw data tuples into a list of Classmate objects"""
+    """This helper function converts a list of raw tuples (from the database) into a list of Classmate objects."""
     new_list = []
     for i in data:
         new_list.append(Classmate(i[0], i[1], i[2], i[3], i[4], i[5]))
