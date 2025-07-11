@@ -16,16 +16,16 @@ def compute_stats(classmates: list[Classmate]) -> dict:
     # Uni stats
     uni_classmates = [c for c in classmates if c.went_to_university]
     to_uni = len(uni_classmates)
-    percent_to_uni = str(round(to_uni / total, 2) * 100) + "%"
+    percent_to_uni = str(round(to_uni / total * 100, 1)) + "%"
     no_uni = total - to_uni
-    percent_no_uni = str(round(no_uni / total, 2) * 100) + "%"
+    percent_no_uni = str(round(no_uni / total * 100, 1)) + "%"
     uni_data = [("Count", to_uni, no_uni), ("Percent", percent_to_uni, percent_no_uni)]
 
     # State stats
     out_state = len([c for c in classmates if c.out_of_state])
-    percent_out = str(round(out_state / total, 2) * 100) + "%"
+    percent_out = str(round(out_state / total * 100, 1)) + "%"
     in_state = total - out_state
-    percent_in = str(round(in_state / total, 2) * 100) + "%"
+    percent_in = str(round(in_state / total * 100, 1)) + "%"
 
     state_data = [("Count", out_state, in_state), ("Percent", percent_out, percent_in)]
 
