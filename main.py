@@ -8,7 +8,7 @@ from classmate import Classmate
 
 # --- Configuration ---
 db_name = "yourClassData.db" # Edit this if you want a different file name
-db_order = "name" # Edit this if you want to sort database by different column (e.g., id, name, university_name, etc.)
+db_order = "name" # Edit this if you want to sort database by different column (e.g., classmate_id, name, university_name, etc.)
 create_command = """CREATE TABLE IF NOT EXISTS classmates(
         classmate_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
