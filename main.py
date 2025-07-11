@@ -91,7 +91,7 @@ def search_row(cursor):
     """Prompt the user for a name (or partial name), search for matching entries in the database,
     and display results in a formatted table."""
     name = interface.request_name()
-    cursor.execute("SELECT * FROM classmates WHERE name LIKE ?", (f"%{name}%",))
+    cursor.execute("SELECT * FROM classmates WHERE name LIKE ? ORDER BY name ASC", (f"%{name}%",))
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
 
@@ -100,7 +100,7 @@ def search_row(cursor):
 
 def view_all(cursor):
     """Retrieve and display all classmate entries from the database in a formatted table."""
-    cursor.execute("SELECT * FROM classmates")
+    cursor.execute("SELECT * FROM classmates ORDER BY name ASC")
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
 
