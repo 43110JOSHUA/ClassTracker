@@ -55,8 +55,6 @@ The program calculates:
    * `6` – Calculate statistics
    * `7` – Quit program
 
----
-
 ## ✅ Requirements
 
 * Python 3.7+
