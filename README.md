@@ -16,8 +16,6 @@ A **simple Python + SQLite3** program for storing and analyzing information abou
 * View, search, edit, or delete entries
 * Calculate and display simple statistics
 
----
-
 ## 📟 Example Database Entry
 
 ```
@@ -25,8 +23,6 @@ A **simple Python + SQLite3** program for storing and analyzing information abou
 |------|--------------|--------------|------------|---------------------|---------------------------------|
 |    1 | Joshua Tang  | True         | student    | True                | University of California Irvine |
 ```
-
----
 
 ## 📊 Statistics
 
@@ -36,8 +32,6 @@ The program calculates:
 * Number and percentage who left the state
 * Number and percentage who attended college
 * Top 3 most frequently attended colleges
-
----
 
 ## 🚀 Getting Started
 
