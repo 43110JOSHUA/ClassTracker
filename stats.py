@@ -4,10 +4,10 @@ from classmate import Classmate
 from collections import Counter
 
 
-def compute_stats(classmates: list[Classmate]):
+def compute_stats(classmates: list[Classmate]) -> dict:
     """This function takes in a list of Classmates in the database and computes the number 
     of students who went to university, who left the state, and the top 3 universities. Returns a dictionary
-    of the data"""
+    of the data."""
     total = len(classmates)
 
     # Uni stats
