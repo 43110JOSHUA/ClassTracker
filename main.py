@@ -95,7 +95,7 @@ def search_row(cursor):
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
 
-    interface.print_table(classmate_data)
+    interface.print_classmates(classmate_data)
 
 
 def view_all(cursor):
@@ -104,7 +104,7 @@ def view_all(cursor):
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
 
-    interface.print_all_classmates(classmate_data)
+    interface.print_classmates(classmate_data)
 
 
 def calc_stats(cursor):
