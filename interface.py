@@ -80,7 +80,7 @@ def request_name() -> str:
 
 
 # --- Output Functions ---
-def print_table(data: list[Classmate]):
+def print_all_classmates(data: list[Classmate]):
     """Print a list of Classmate objects in table format using tabulate."""
     if data:
         print(tabulate(data, headers=classmate_header, tablefmt="github"))

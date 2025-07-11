@@ -27,7 +27,7 @@ def compute_stats(classmates: list[Classmate]) -> dict:
     in_state = total - out_state
     percent_in = str(round(in_state / total, 2) * 100) + "%"
 
-    state_data = [("Count", in_state, out_state), ("Percent", percent_in, percent_out)]
+    state_data = [("Count", out_state, in_state), ("Percent", percent_out, percent_in)]
 
     # Top unis
     number_of_common_unis = 3
