@@ -54,13 +54,13 @@ def failure_id(id: int):
 
 def new_data() -> UncreatedClassmate:
     """"Prompt the user for all data required to create or update a classmate entry."""
-    name = input("Enter full name: ")
-    out_of_state = input("Did they leave the state? (y/n): ").lower() == 'y'
-    occupation = input("Enter occupation: ").lower()
-    went_to_university = input("Did they go to university? (y/n): ").lower() == 'y'
+    name = input("Enter full name: ").strip()
+    out_of_state = input("Did they leave the state? (y/n): ").lower().strip() == 'y'
+    occupation = input("Enter occupation: ").lower().strip()
+    went_to_university = input("Did they go to university? (y/n): ").lower().strip() == 'y'
     university_name = "N/A"
     if went_to_university:
-        university_name = input("Enter the name of the university: ")
+        university_name = input("Enter the name of the university: ").strip()
 
     return UncreatedClassmate(name, out_of_state, occupation, went_to_university, university_name)
 
