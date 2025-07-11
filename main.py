@@ -7,7 +7,8 @@ from classmate import Classmate
 
 
 # --- Configuration ---
-db_name = 'yourClassData.db'  # Edit this if you want a different file name
+db_name = "yourClassData.db" # Edit this if you want a different file name
+db_order = "name" # Edit this if you want to sort database by different column (e.g., id, name, university_name, etc.)
 create_command = """CREATE TABLE IF NOT EXISTS classmates(
         classmate_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -91,7 +92,7 @@ def search_row(cursor):
     """Prompt the user for a name (or partial name), search for matching entries in the database,
     and display results in a formatted table."""
     name = interface.request_name()
-    cursor.execute("SELECT * FROM classmates WHERE name LIKE ? ORDER BY name ASC", (f"%{name}%",))
+    cursor.execute(f"SELECT * FROM classmates WHERE name LIKE ? ORDER BY {db_order} ASC", (f"%{name}%",))
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
 
@@ -100,7 +101,7 @@ def search_row(cursor):
 
 def view_all(cursor):
     """Retrieve and display all classmate entries from the database in a formatted table."""
-    cursor.execute("SELECT * FROM classmates ORDER BY name ASC")
+    cursor.execute(f"SELECT * FROM classmates ORDER BY {db_order} ASC")
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
 
