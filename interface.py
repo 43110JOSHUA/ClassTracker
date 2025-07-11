@@ -90,14 +90,17 @@ def print_table(data: list[Classmate]):
 
 def print_stats(data: dict):
     """Display calculated statistics in multiple formatted tables (university, location, top schools)."""
-    # University attendance
-    uni_header = ["", "Attended University", "Did Not Attend"]
-    print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))
+    if data:
+        # University attendance
+        uni_header = ["", "Attended University", "Did Not Attend"]
+        print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))
 
-    # State relocation
-    state_header = ["", "Left the State", "Stayed in State"]
-    print("\n" + tabulate(data["state_data"], headers=state_header, tablefmt="github"))
+        # State relocation
+        state_header = ["", "Left the State", "Stayed in State"]
+        print("\n" + tabulate(data["state_data"], headers=state_header, tablefmt="github"))
 
-    # Top universities
-    top_uni_header = ["University", "Number of Classmates"]
-    print("\n" + tabulate(data["top_unis"], headers=top_uni_header, tablefmt="github"))
+        # Top universities
+        top_uni_header = ["University", "Number of Classmates"]
+        print("\n" + tabulate(data["top_unis"], headers=top_uni_header, tablefmt="github"))
+    else:
+        print(empty_db_message)

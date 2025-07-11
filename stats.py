@@ -8,6 +8,9 @@ def compute_stats(classmates: list[Classmate]) -> dict:
     """This function takes in a list of Classmates in the database and computes the number 
     of students who went to university, who left the state, and the top 3 universities. Returns a dictionary
     of the data."""
+    if not classmates:
+        return None
+
     total = len(classmates)
 
     # Uni stats
