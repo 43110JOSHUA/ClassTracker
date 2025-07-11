@@ -71,10 +71,9 @@ def request_name() -> str:
     return input("Enter the name of the classmate to search: ")
 
 
-def print_table(data: list[list]):
+def print_table(data: list[Classmate]):
     """This function prints all provided classmates in table format."""
     if data:
-        formatted = [[row[0], row[1], bool(row[2]), row[3], bool(row[4]), row[5]] for row in data] # change into bool
-        print(tabulate(formatted, headers=classmate_header, tablefmt="github"))
+        print(tabulate(data, headers=classmate_header, tablefmt="github"))
     else:
         print(empty_db_message)

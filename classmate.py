@@ -9,7 +9,11 @@ class Classmate:
     def __init__(self, id: int, name: str, out_of_state: bool, occupation: str, went_to_university: bool, university_name: str):
         self.id = id
         self.name = name
-        self.out_of_state = out_of_state
+        self.out_of_state = bool(out_of_state)
         self.occupation = occupation
-        self.went_to_university = went_to_university
+        self.went_to_university = bool(went_to_university)
         self.university_name = university_name
+
+    def __iter__(self):
+        """Allows Classmate to be unpacked like a tuple/list."""
+        return iter([self.id, self.name, self.out_of_state, self.occupation, self.went_to_university, self.university_name])

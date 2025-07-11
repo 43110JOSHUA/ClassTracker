@@ -2,23 +2,24 @@
 
 import sqlite3
 import interface
+import stats
 from classmate import Classmate
 
 db_name = 'yourClassData.db' # Edit this if you want a different file name
+create_command = """CREATE TABLE IF NOT EXISTS classmates(
+        classmate_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        out_of_state INTEGER NOT NULL,
+        occupation TEXT,
+        went_to_university INTEGER NOT NULL,
+        university_name TEXT
+        )"""
 
 def main():
     connection = sqlite3.connect(db_name)
     cursor = connection.cursor()
 
     # STEP 1: Create Database
-    create_command = """CREATE TABLE IF NOT EXISTS classmates(
-        classmate_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        out_of_state INTEGER NOT NULL,
-        occupation TEXT NOT NULL ,
-        went_to_university INTEGER NOT NULL,
-        university_name TEXT
-        )"""
     cursor.execute(create_command)
     connection.commit()
 
@@ -63,7 +64,7 @@ def add_row(cursor, connection):
     cursor.execute("""
         INSERT INTO classmates (name, out_of_state, occupation, went_to_university, university_name)
         VALUES (?, ?, ?, ?, ?)""",
-        (new_classmate.name, int(new_classmate.out_of_state), new_classmate.occupation, int(new_classmate.went_to_university),
+        (new_classmate.name, new_classmate.out_of_state, new_classmate.occupation, new_classmate.went_to_university,
         new_classmate.university_name))
     connection.commit()
 
@@ -92,8 +93,8 @@ def edit_row(cursor, connection):
     if (classmate_to_edit):
         editted_classmate = interface.new_data()
         cursor.execute("UPDATE classmates SET name = ?, out_of_state = ?, occupation = ?, went_to_university = ?," \
-        "university_name = ? WHERE classmate_id = ?", (editted_classmate.name, int(editted_classmate.out_of_state),
-                                                       editted_classmate.occupation, int(editted_classmate.went_to_university),
+        "university_name = ? WHERE classmate_id = ?", (editted_classmate.name, editted_classmate.out_of_state,
+                                                       editted_classmate.occupation, editted_classmate.went_to_university,
                                                        editted_classmate.university_name, id_to_edit))
         connection.commit()
         interface.successfully_action(classmate_to_edit, "editted")
@@ -107,21 +108,27 @@ def search_row(cursor):
     name = interface.request_name()
     cursor.execute("SELECT * FROM classmates WHERE name LIKE ?", (f"%{name}%",))
     db_data = cursor.fetchall()
+    classmate_data = _convert_to_classmate(db_data)
     
-    interface.print_table(db_data)
+    interface.print_table(classmate_data)
 
 
 def view_all(cursor):
     """Displays all classmates in the database in a table format."""
     cursor.execute("SELECT * FROM classmates")
     db_data = cursor.fetchall()
+    classmate_data = _convert_to_classmate(db_data)
     
-    interface.print_table(db_data)
+    interface.print_table(classmate_data)
 
 
-def calc_stats():
+def calc_stats(cursor):
     """Calculates and displays statistics."""
-    pass
+    cursor.execute("SELECT * FROM classmates")
+    db_data = cursor.fetchall()
+    classmate_data = _convert_to_classmate(db_data)
+    
+    interface.print_table(classmate_data)
 
 
 # HELPERS
@@ -135,6 +142,15 @@ def _retrieve_row(cursor, id_num: int) -> Classmate:
                          classmate_found[4], classmate_found[5])
     else: 
         return None
+
+
+def _convert_to_classmate(data: list[list]) -> list[Classmate]:
+    """This helper function converts a list of raw data tuples into a list of Classmate objects"""
+    new_list = []
+    for i in data:
+        new_list.append(Classmate(i[0], i[1], i[2], i[3], i[4], i[5]))
+    
+    return new_list
 
 
 if __name__ == "__main__":
