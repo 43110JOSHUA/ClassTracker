@@ -52,7 +52,7 @@ def failure_id(id: int):
     print(failure_id_message, id)
 
 
-def new_data() -> UncreatedClassmate:
+def request_new_data() -> UncreatedClassmate:
     """"Prompt the user for all data required to create or update a classmate entry."""
     name = input("Enter full name: ").strip()
     out_of_state = input("Did they leave the state? (y/n): ").lower().strip() == 'y'

@@ -40,7 +40,7 @@ def _convert_to_classmate(data: list[list]) -> list[Classmate]:
 def add_row(cursor, connection):
     """Prompt the user for new classmate data and insert it into the database.
     Commits the change after successful insertion."""
-    new_classmate = interface.new_data()
+    new_classmate = interface.request_new_data()
 
     cursor.execute("""
         INSERT INTO classmates (name, out_of_state, occupation, went_to_university, university_name)
@@ -73,7 +73,7 @@ def edit_row(cursor, connection):
     classmate_to_edit = _retrieve_row(cursor, id_to_edit)
 
     if classmate_to_edit:
-        editted_classmate = interface.new_data()
+        editted_classmate = interface.request_new_data()
         cursor.execute("""
             UPDATE classmates 
             SET name = ?, out_of_state = ?, occupation = ?, went_to_university = ?, university_name = ?
