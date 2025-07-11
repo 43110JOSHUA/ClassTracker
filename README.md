@@ -1,17 +1,71 @@
-# Classmate Tracker
+# 🎓 Classmate Tracker
 
-A **simple Python + SQLite3** program to store and analyze information about your friends or classmates in a local database.
-Each entry has a peron's name, are they out-of-state, occupation, did they go to college, name of college (if attended). Calculates
-count and percent of who left the state, who attended college, and lists the top 3 most attended colleges.
+A **simple Python + SQLite3** program for storing and analyzing information about your friends or classmates using a local database.
 
-## Getting Started
-1) run "pip install tabulate" in terminal.
-2) run main.py
-3) COMMANDS:
-    - 1 - Add a classmate to the database.
-    - 2 - Remove a classmate from the database.
-    - 3 - Edit a classmate's entry.
-    - 4 - Search for a classmate.
-    - 5 - View all classmates.
-    - 6 - Calculate statistics.
-    - 7 - Quit program.
+---
+
+## 📋 Features
+
+* Store information about each classmate:
+
+  * Full name
+  * Whether they left the state
+  * Current occupation
+  * Whether they attended college
+  * Name of the college (if applicable)
+* View, search, edit, or delete entries
+* Calculate and display simple statistics
+
+---
+
+## 📟 Example Database Entry
+
+```
+|   ID | Name         | Out of State | Occupation | Went to University | University Name                 |
+|------|--------------|--------------|------------|---------------------|---------------------------------|
+|    1 | Joshua Tang  | True         | student    | True                | University of California Irvine |
+```
+
+---
+
+## 📊 Statistics
+
+The program calculates:
+
+* Total number of entries
+* Number and percentage who left the state
+* Number and percentage who attended college
+* Top 3 most frequently attended colleges
+
+---
+
+## 🚀 Getting Started
+
+1. Install dependencies:
+
+   ```bash
+   pip install tabulate
+   ```
+2. Run the program:
+
+   ```bash
+   python main.py
+   ```
+3. Available Commands:
+
+   * `1` – Add a classmate
+   * `2` – Remove a classmate
+   * `3` – Edit a classmate
+   * `4` – Search for a classmate
+   * `5` – View all classmates
+   * `6` – Calculate statistics
+   * `7` – Quit program
+
+---
+
+## ✅ Requirements
+
+* Python 3.7+
+* [tabulate](https://pypi.org/project/tabulate/)
+
+---
