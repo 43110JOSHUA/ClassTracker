@@ -23,18 +23,22 @@ empty_db_message = "No entries found in the database."
 
 # --- Core Interface Functions ---
 def command_input():
+    """Prompt the user for a command and return the input string."""
     return input("\nCommand: ")
 
 
 def help():
+    """Display the list of available user commands."""
     print(help_message)
 
 
 def quit():
+    """Print a message confirming the program is exiting."""
     print(quit_message)
 
 
 def invalid_command():
+    """Print an error message for an unrecognized command."""
     print(invalid_command_message)
 
 
@@ -49,7 +53,7 @@ def failure_id(id: int):
 
 
 def new_data() -> UncreatedClassmate:
-    """Prompt the user for classmate data. Used when adding or editing entries."""
+    """"Prompt the user for all data required to create or update a classmate entry."""
     name = input("Enter full name: ")
     out_of_state = input("Did they leave the state? (y/n): ").lower() == 'y'
     occupation = input("Enter occupation: ").lower()
@@ -85,7 +89,7 @@ def print_table(data: list[Classmate]):
 
 
 def print_stats(data: dict):
-    """Print formatted statistics from the stats module output."""
+    """Display calculated statistics in multiple formatted tables (university, location, top schools)."""
     # University attendance
     uni_header = ["", "Attended University", "Did Not Attend"]
     print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))
