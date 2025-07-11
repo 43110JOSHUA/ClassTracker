@@ -91,6 +91,8 @@ def print_all_classmates(data: list[Classmate]):
 def print_stats(data: dict):
     """Display calculated statistics in multiple formatted tables (university, location, top schools)."""
     if data:
+        print(f"\nThere are {data["total"]} classmates in the database.")
+
         # University attendance
         uni_header = ["", "Attended University", "Did Not Attend"]
         print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))

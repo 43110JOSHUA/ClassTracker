@@ -33,4 +33,4 @@ def compute_stats(classmates: list[Classmate]) -> dict:
     number_of_common_unis = 3
     top_unis = Counter(c.university_name for c in uni_classmates).most_common(number_of_common_unis)
     
-    return {"uni_data": uni_data, "state_data": state_data, "top_unis": top_unis}
+    return {"total": total, "uni_data": uni_data, "state_data": state_data, "top_unis": top_unis}

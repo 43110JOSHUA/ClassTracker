@@ -1,7 +1,8 @@
 # Classmate Tracker
 
 A **simple Python + SQLite3** program to store and analyze information about your friends or classmates in a local database.
-Each entry has a peron's name, are they out-of-state, occupation, did they go to college, name of college (if attended).
+Each entry has a peron's name, are they out-of-state, occupation, did they go to college, name of college (if attended). Calculates
+count and percent of who left the state, who attended college, and lists the top 3 most attended colleges.
 
 ## Getting Started
 1) run "pip install tabulate" in terminal.
