@@ -4,25 +4,26 @@ from classmate import Classmate, UncreatedClassmate
 from tabulate import tabulate
 
 
+# --- Constants ---
 invalid_command_message = "Invalid command."
-help_message = ("1 - Add another classmate to the database.\n"
-                "2 - Remove a classmate from the database.\n"
-                "3 - Edit a classmate's entry.\n"
-                "4 - Search for a classmate.\n"
-                "5 - View all classmates.\n"
-                "6 - Calculate statistics.\n"
-                "7 - Quit program.")
+help_message = (
+    "1 - Add another classmate to the database.\n"
+    "2 - Remove a classmate from the database.\n"
+    "3 - Edit a classmate's entry.\n"
+    "4 - Search for a classmate.\n"
+    "5 - View all classmates.\n"
+    "6 - Calculate statistics.\n"
+    "7 - Quit program."
+)
 quit_message = "Closing program."
 failure_id_message = "Provided ID doesn't exist:"
 classmate_header = ["ID", "Name", "Out of State", "Occupation", "Went to University", "University Name"]
 empty_db_message = "No entries found in the database."
 
+
+# --- Core Interface Functions ---
 def command_input():
     return input("\nCommand: ")
-
-
-def invalid_command():
-    print(invalid_command_message)
 
 
 def help():
@@ -33,41 +34,22 @@ def quit():
     print(quit_message)
 
 
+def invalid_command():
+    print(invalid_command_message)
+
+
 def successfully_action(classmate: Classmate, action: str):
-    """This function is called for any successful operation on an entry in the database."""
+    """Print a message confirming a successful database action (e.g., add, remove, edit)."""
     print(f"Successfully {action} entry:", classmate.name)
 
 
 def failure_id(id: int):
-    """This function is called whenever a requested ID doesn't exist."""
+    """Print a message when a given ID is not found in the database."""
     print(failure_id_message, id)
 
 
-def print_table(data: list[Classmate]):
-    """This function prints all provided classmates in table format."""
-    if data:
-        print(tabulate(data, headers=classmate_header, tablefmt="github"))
-    else:
-        print(empty_db_message)
-
-
-def print_stats(data: dict):
-    """This function prints stats. Provided the data from stats function"""
-    # University attendance
-    uni_header = ["", "Attended University", "Did Not Attend"]
-    print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))
-
-    # State relocation
-    state_header = ["", "Left the State", "Stayed in State"]
-    print("\n" + tabulate(data["state_data"], headers=state_header, tablefmt="github"))
-
-    # Top universities
-    top_uni_header = ["University", "Number of Classmates"]
-    print("\n" + tabulate(data["top_unis"], headers=top_uni_header, tablefmt="github"))
-
-
 def new_data() -> UncreatedClassmate:
-    """This function will collect the data for the new classmate/ editting a classmate."""
+    """Prompt the user for classmate data. Used when adding or editing entries."""
     name = input("Enter full name: ")
     out_of_state = input("Did they leave the state? (y/n): ").lower() == 'y'
     occupation = input("Enter occupation: ").lower()
@@ -80,16 +62,38 @@ def new_data() -> UncreatedClassmate:
 
 
 def request_id(action: str = "access") -> int:
-    """Prompts the user for an ID number with context. Accepts a custom action string to reuse for
-    different commands (e.g., 'remove', 'edit')."""
+    """Prompt the user for a classmate ID for a given action (e.g., remove, edit)."""
     wanted_id = input(f"Enter the ID number of the classmate to {action}: ")
     while not wanted_id.isnumeric():
         invalid_command()
         wanted_id = input(f"Enter the ID number of the classmate to {action}: ")
-    
     return int(wanted_id)
 
 
 def request_name() -> str:
-    """Prompts the use for a name to search up in the database."""
+    """Prompt the user for a name (or partial name) to search in the database."""
     return input("Enter the name of the classmate to search: ")
+
+
+# --- Output Functions ---
+def print_table(data: list[Classmate]):
+    """Print a list of Classmate objects in table format using tabulate."""
+    if data:
+        print(tabulate(data, headers=classmate_header, tablefmt="github"))
+    else:
+        print(empty_db_message)
+
+
+def print_stats(data: dict):
+    """Print formatted statistics from the stats module output."""
+    # University attendance
+    uni_header = ["", "Attended University", "Did Not Attend"]
+    print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))
+
+    # State relocation
+    state_header = ["", "Left the State", "Stayed in State"]
+    print("\n" + tabulate(data["state_data"], headers=state_header, tablefmt="github"))
+
+    # Top universities
+    top_uni_header = ["University", "Number of Classmates"]
+    print("\n" + tabulate(data["top_unis"], headers=top_uni_header, tablefmt="github"))

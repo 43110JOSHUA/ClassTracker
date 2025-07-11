@@ -5,6 +5,7 @@ import interface
 import stats
 from classmate import Classmate
 
+
 # --- Configuration ---
 db_name = 'yourClassData.db'  # Edit this if you want a different file name
 create_command = """CREATE TABLE IF NOT EXISTS classmates(
@@ -15,6 +16,7 @@ create_command = """CREATE TABLE IF NOT EXISTS classmates(
         went_to_university INTEGER NOT NULL,
         university_name TEXT
         )"""
+
 
 # --- Helper Functions ---
 def _retrieve_row(cursor, id_num: int) -> Classmate:
@@ -28,9 +30,11 @@ def _retrieve_row(cursor, id_num: int) -> Classmate:
     else:
         return None
 
+
 def _convert_to_classmate(data: list[list]) -> list[Classmate]:
     """Convert a list of raw tuples (from the database) into a list of Classmate objects."""
     return [Classmate(*row) for row in data]
+
 
 # --- Core Functions ---
 def add_row(cursor, connection):
@@ -47,6 +51,7 @@ def add_row(cursor, connection):
 
     interface.successfully_action(new_classmate, "added")
 
+
 def remove_row(cursor, connection):
     """Prompt the user for an ID and remove the corresponding classmate entry from the database.
     Displays success or failure message based on ID existence."""
@@ -59,6 +64,7 @@ def remove_row(cursor, connection):
         interface.successfully_action(classmate_to_remove, "removed")
     else:
         interface.failure_id(id_to_remove)
+
 
 def edit_row(cursor, connection):
     """Prompt the user for an ID and update the corresponding classmate entry in the database.
@@ -80,6 +86,7 @@ def edit_row(cursor, connection):
     else:
         interface.failure_id(id_to_edit)
 
+
 def search_row(cursor):
     """Prompt the user for a name (or partial name), search for matching entries in the database,
     and display results in a formatted table."""
@@ -90,6 +97,7 @@ def search_row(cursor):
 
     interface.print_table(classmate_data)
 
+
 def view_all(cursor):
     """Retrieve and display all classmate entries from the database in a formatted table."""
     cursor.execute("SELECT * FROM classmates")
@@ -97,6 +105,7 @@ def view_all(cursor):
     classmate_data = _convert_to_classmate(db_data)
 
     interface.print_table(classmate_data)
+
 
 def calc_stats(cursor):
     """Retrieve all classmate entries from the database, compute statistics,
@@ -107,6 +116,7 @@ def calc_stats(cursor):
 
     compiled_stats = stats.compute_stats(classmate_data)
     interface.print_stats(compiled_stats)
+
 
 # --- Main Program ---
 def main():
@@ -144,6 +154,7 @@ def main():
 
     # STEP 3: Close Connection
     connection.close()
+
 
 if __name__ == "__main__":
     main()
