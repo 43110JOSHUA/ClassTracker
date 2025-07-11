@@ -33,8 +33,41 @@ def quit():
     print(quit_message)
 
 
+def successfully_action(classmate: Classmate, action: str):
+    """This function is called for any successful operation on an entry in the database."""
+    print(f"Successfully {action} entry:", classmate.name)
+
+
+def failure_id(id: int):
+    """This function is called whenever a requested ID doesn't exist."""
+    print(failure_id_message, id)
+
+
+def print_table(data: list[Classmate]):
+    """This function prints all provided classmates in table format."""
+    if data:
+        print(tabulate(data, headers=classmate_header, tablefmt="github"))
+    else:
+        print(empty_db_message)
+
+
+def print_stats(data: dict):
+    """This function prints stats."""
+    # University attendance
+    uni_header = ["", "Attended University", "Did Not Attend"]
+    print("\n" + tabulate(data["uni_data"], headers=uni_header, tablefmt="github"))
+
+    # State relocation
+    state_header = ["", "Left the State", "Stayed in State"]
+    print("\n" + tabulate(data["state_data"], headers=state_header, tablefmt="github"))
+
+    # Top universities
+    top_uni_header = ["University", "Number of Classmates"]
+    print("\n" + tabulate(data["top_unis"], headers=top_uni_header, tablefmt="github"))
+
+
 def new_data() -> UncreatedClassmate:
-    """This function will collect the data for the new classmate."""
+    """This function will collect the data for the new classmate/ editting a classmate."""
     name = input("Enter full name: ")
     out_of_state = input("Did they leave the state? (y/n): ").lower() == 'y'
     occupation = input("Enter occupation: ").lower()
@@ -44,11 +77,6 @@ def new_data() -> UncreatedClassmate:
         university_name = input("Enter the name of the university: ")
 
     return UncreatedClassmate(name, out_of_state, occupation, went_to_university, university_name)
-
-
-def successfully_action(classmate: Classmate, action: str):
-    """This function is called for any successful operation on an entry in the database."""
-    print(f"Successfully {action} entry:", classmate.name)
 
 
 def request_id(action: str = "access") -> int:
@@ -62,18 +90,6 @@ def request_id(action: str = "access") -> int:
     return int(wanted_id)
 
 
-def failure_id(id: int):
-    print(failure_id_message, id)
-
-
 def request_name() -> str:
     """Prompts the use for a name to search up in the database."""
     return input("Enter the name of the classmate to search: ")
-
-
-def print_table(data: list[Classmate]):
-    """This function prints all provided classmates in table format."""
-    if data:
-        print(tabulate(data, headers=classmate_header, tablefmt="github"))
-    else:
-        print(empty_db_message)

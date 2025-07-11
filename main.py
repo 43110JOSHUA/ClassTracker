@@ -127,8 +127,9 @@ def calc_stats(cursor):
     cursor.execute("SELECT * FROM classmates")
     db_data = cursor.fetchall()
     classmate_data = _convert_to_classmate(db_data)
-    
-    interface.print_table(classmate_data)
+
+    compiled_stats = stats.compute_stats(classmate_data)
+    interface.print_stats(compiled_stats)
 
 
 # HELPERS
