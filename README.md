@@ -19,7 +19,7 @@ A **simple Python + SQLite3** program for storing and analyzing information abou
 ## 📟 Example Database Entry
 
 ```
-|   ID | Name         | Out of State | Occupation | Went to University | University Name                 |
+|   ID | Name         | Out of State | Occupation | Went to University  | University Name                 |
 |------|--------------|--------------|------------|---------------------|---------------------------------|
 |    1 | Joshua Tang  | True         | student    | True                | University of California Irvine |
 ```
