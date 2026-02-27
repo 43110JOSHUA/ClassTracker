@@ -8,7 +8,7 @@ from classmate import Classmate
 
 # --- Configuration ---
 db_name = "yourClassData.db" # Edit this if you want a different file name
-db_order = "name" # Edit this if you want to sort database by different column (e.g., classmate_id, name, university_name, etc.)
+db_order = "university_name" # Edit this if you want to sort database by different column (e.g., classmate_id, name, university_name, etc.)
 create_command = """CREATE TABLE IF NOT EXISTS classmates(
         classmate_id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -20,7 +20,7 @@ create_command = """CREATE TABLE IF NOT EXISTS classmates(
 
 
 # --- Helper Functions ---
-def _retrieve_row(cursor, id_num: int) -> Classmate:
+def _retrieve_row(cursor, id_num: int) -> Classmate | None:
     """Retrieve a row given an ID and return it as a Classmate object."""
     cursor.execute("SELECT * FROM classmates WHERE classmate_id = ?", (id_num,))
     classmate_found = cursor.fetchone()

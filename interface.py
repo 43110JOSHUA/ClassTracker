@@ -42,7 +42,7 @@ def invalid_command():
     print(invalid_command_message)
 
 
-def successfully_action(classmate: Classmate, action: str):
+def successfully_action(classmate: Classmate | UncreatedClassmate, action: str):
     """Print a message confirming a successful database action (e.g., add, remove, edit)."""
     print(f"Successfully {action} entry:", classmate.name)
 
